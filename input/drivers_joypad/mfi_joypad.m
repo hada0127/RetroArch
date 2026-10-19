@@ -72,6 +72,22 @@ static bool mfi_controller_is_siri_remote(GCController *controller)
    return controller.microGamepad && !controller.extendedGamepad && [@"Remote" isEqualToString:controller.vendorName];
 }
 
+/* 8BitDo FlipPad: swap A<->B and X<->Y for this controller only. */
+#define MFI_FLIPPAD_VENDOR_NAME @"8BitDo FlipPad"
+
+static bool mfi_controller_is_flippad(GCController *controller)
+{
+   return [MFI_FLIPPAD_VENDOR_NAME isEqualToString:controller.vendorName];
+}
+
+static uint32_t mfi_swap_bits(uint32_t v, unsigned a, unsigned b)
+{
+   uint32_t ba = (v >> a) & 1, bb = (v >> b) & 1;
+   if (ba != bb)
+      v ^= (1u << a) | (1u << b);
+   return v;
+}
+
 static void apple_gamecontroller_joypad_poll_internal(GCController *controller, uint32_t slot)
 {
     uint32_t *buttons        = &mfi_buttons[slot];
@@ -201,6 +217,11 @@ static void apple_gamecontroller_joypad_poll_internal(GCController *controller, 
         *buttons     |= gp.rightShoulder.pressed ? (1 << RETRO_DEVICE_ID_JOYPAD_R)     : 0;
     }
 #pragma clang diagnostic pop
+    if (mfi_controller_is_flippad(controller))
+    {
+       *buttons = mfi_swap_bits(*buttons, RETRO_DEVICE_ID_JOYPAD_A, RETRO_DEVICE_ID_JOYPAD_B);
+       *buttons = mfi_swap_bits(*buttons, RETRO_DEVICE_ID_JOYPAD_X, RETRO_DEVICE_ID_JOYPAD_Y);
+    }
 }
 
 static void apple_gamecontroller_joypad_poll(void)
@@ -533,6 +554,9 @@ static void apple_gamecontroller_joypad_connect(GCController *controller)
     [mfiControllers addObject:controller];
 
     RARCH_LOG("[MFI] Controller connected, beginning setup and autodetect...\n");
+    RARCH_LOG("[MFI] vendorName: \"%s\" (FlipPad A/B X/Y swap: %s)\n",
+          controller.vendorName ? [controller.vendorName UTF8String] : "(null)",
+          mfi_controller_is_flippad(controller) ? "on" : "off");
     apple_gamecontroller_joypad_register(controller);
     apple_gamecontroller_joypad_setup_haptics(controller);
     mfi_joypad_autodetect_add((unsigned)controller.playerIndex, [controller.vendorName cStringUsingEncoding:NSUTF8StringEncoding]);
