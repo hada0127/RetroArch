@@ -564,8 +564,9 @@ QEMU_MIPSEL ?= qemu-mipsel
 # TSan: a table built on first use or a cached CPU-feature check is a
 # reported race here on any runner, where a network test sees it only
 # when two connections happen to start together on two cores. Then the
-# x509 trust store, walked while it is replaced, and the TLS session
-# cache, read while it is rewritten, under TSan and ASan.
+# x509 trust store, walked while it is replaced, the TLS session cache,
+# read while it is rewritten, and the curve constants, first used from
+# several threads, under TSan and ASan.
 crypto-tsan-check:
 	$(CC) -O1 -g -fsanitize=thread -Iinclude test/crypto/crypto_threads_test.c \
 	   $(filter-out test/crypto/test_crypto.c,$(TEST_CRYPTO_SRC)) -lpthread -lm \
@@ -611,6 +612,20 @@ crypto-tsan-check:
 	   -o test/net/tls_cache_threads_test
 	test/net/tls_cache_threads_test
 	rm -f test/net/tls_cache_threads_test
+	$(CC) -O1 -g -D_GNU_SOURCE -fsanitize=thread -DHAVE_THREADS -Iinclude test/crypto/ec_first_use_test.c \
+	   $(filter-out test/crypto/test_crypto.c,$(TEST_CRYPTO_SRC)) rthreads/rthreads.c -lpthread -lm \
+	   -o test/crypto/ec_first_use_test
+	TSAN_OPTIONS="halt_on_error=1 exitcode=66" test/crypto/ec_first_use_test
+	$(CC) -O1 -g -D_GNU_SOURCE -DHAVE_THREADS -DEC_TEST_HOLD_LANE -Iinclude test/crypto/ec_first_use_test.c \
+	   $(filter-out test/crypto/test_crypto.c crypto/pk.c,$(TEST_CRYPTO_SRC)) rthreads/rthreads.c \
+	   -lpthread -lm -o test/crypto/ec_first_use_test
+	test/crypto/ec_first_use_test
+	$(CC) -O1 -g -D_GNU_SOURCE -DHAVE_THREADS -DEC_TEST_HOLD_LANE -DEC_TEST_WAIT -Iinclude \
+	   test/crypto/ec_first_use_test.c \
+	   $(filter-out test/crypto/test_crypto.c crypto/pk.c,$(TEST_CRYPTO_SRC)) rthreads/rthreads.c \
+	   -lpthread -lm -o test/crypto/ec_first_use_test
+	test/crypto/ec_first_use_test
+	rm -f test/crypto/ec_first_use_test
 
 crypto-mips-check:
 	@if ! command -v $(MIPSEL_CC) >/dev/null 2>&1; then echo "skip: $(MIPSEL_CC) not installed"; exit 0; fi; \
