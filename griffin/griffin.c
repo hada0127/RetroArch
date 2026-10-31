@@ -1141,7 +1141,8 @@ FIFO BUFFER
 #include "../libretro-common/queues/retro_spsc.c"
 /* Native Windows audio workers also need rthreads and eventcounts. */
 #if defined(HAVE_THREADS) || (defined(_WIN32) && !defined(_XBOX) \
-      && (defined(HAVE_DSOUND) || defined(HAVE_XAUDIO) || defined(HAVE_WAVEOUT)))
+      && (defined(HAVE_DSOUND) || defined(HAVE_XAUDIO) || defined(HAVE_WAVEOUT) \
+      || defined(HAVE_ASIO)))
 #include "../libretro-common/rthreads/retro_eventcount.c"
 #endif
 #if defined(HAVE_THREADS)
@@ -1762,7 +1763,8 @@ THREAD
 #include "../frontend/thread_elevation/eevdf.c"
 #endif
 #elif defined(_WIN32) && !defined(_XBOX) \
-      && (defined(HAVE_DSOUND) || defined(HAVE_XAUDIO) || defined(HAVE_WAVEOUT))
+      && (defined(HAVE_DSOUND) || defined(HAVE_XAUDIO) || defined(HAVE_WAVEOUT) \
+      || defined(HAVE_ASIO))
 #include "../libretro-common/rthreads/rthreads.c"
 #endif
 
