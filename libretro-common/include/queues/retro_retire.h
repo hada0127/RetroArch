@@ -54,6 +54,14 @@ typedef struct retro_retire
    retro_atomic_int_t epoch;
 } retro_retire_t;
 
+/* For one not zero-filled already. */
+static INLINE void retro_retire_init(retro_retire_t *r)
+{
+   mpsc_stack_init(&r->retired);
+   retro_atomic_int_init(&r->readers, 0);
+   retro_atomic_int_init(&r->epoch, 0);
+}
+
 /* Frees one retired object, given its node. */
 typedef void (*retro_retire_free_t)(mpsc_stack_node_t *node);
 
