@@ -3985,6 +3985,7 @@ static const struct
    char s_a55bf936[40];
    char s_c519f84d[43];
    char s_48aefa30[39];
+   char s_5d383a58[175];
    char s_dcf8bd8b[49];
    char s_bce9b94f[51];
    char s_d32f5a63[38];
@@ -12745,6 +12746,11 @@ static const struct
    "\".",
    "Hi\341\273\203n th\341\273\213 c\303\240i \304\221\341\272\267t \342\200\230M\341\272\241ng\342"
    "\200\231.",
+   "Hi\341\273\203n th\341\273\213 c\303\241c thi\341\272\277t l\341\272\255p 'Hi\341\273\203n th"
+   "\341\273\213 tr\303\252n m\303\240n h\303\254nh'. \341\272\242nh h\306\260\341\273\237ng \304"
+   "\221\341\272\277n c\341\272\243 'Th\303\264ng b\303\241o tr\303\252n m\303\240n h\303\254nh v"
+   "\303\240 l\341\273\233p ph\341\273\247' trong 'Giao di\341\273\207n ng\306\260\341\273\235i d"
+   "\303\271ng'.",
    "Hi\341\273\203n th\341\273\213 c\303\240i \304\221\341\272\267t \342\200\230Danh s\303\241ch ch"
    "\306\241i\342\200\231.",
    "Hi\341\273\203n th\341\273\213 c\303\240i \304\221\341\272\267t \342\200\230Qu\341\272\243n l"
@@ -15398,7 +15404,7 @@ static const struct
  * compiler that pads this struct fails here instead of
  * misindexing at runtime. */
 typedef char msg_hash_vn_blob_check[
-      (sizeof(msg_hash_vn_blob) == (306401u
+      (sizeof(msg_hash_vn_blob) == (306576u
 #ifdef ANDROID
        + 373u
 #endif
@@ -19920,6 +19926,7 @@ static const msg_hash_id_t msg_hash_vn_ids[] =
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LATENCY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LOGGING,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_NETWORK,
+   (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_ONSCREEN_DISPLAY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_PLAYLISTS,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_POWER_MANAGEMENT,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_RECORDING,

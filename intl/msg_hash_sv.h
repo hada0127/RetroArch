@@ -3802,6 +3802,7 @@ static const struct
    char s_a55bf936[34];
    char s_c519f84d[36];
    char s_48aefa30[37];
+   char s_5d383a58[141];
    char s_dcf8bd8b[39];
    char s_bce9b94f[44];
    char s_d32f5a63[38];
@@ -9731,6 +9732,9 @@ static const struct
    "Visar inst\303\244llningar f\303\266r latens.",
    "Visar inst\303\244llningar f\303\266r loggning.",
    "Visa inst\303\244llningar f\303\266r 'N\303\244tverk'.",
+   "Visa inst\303\244llningar f\303\266r \342\200\235Sk\303\244rmvisning\342\200\235. P\303\245verka"
+   "r b\303\245de \342\200\235Sk\303\244rmmeddelanden och sk\303\244rm\303\266verl\303\244gg\342\200"
+   "\235 under \342\200\235Anv\303\244ndargr\303\244nssnitt\342\200\235.",
    "Visa inst\303\244llningar f\303\266r 'Spellistor'.",
    "Visa inst\303\244llningar f\303\266r 'Energihantering'.",
    "Visar inst\303\244llningar f\303\266r inspelning.",
@@ -11201,7 +11205,7 @@ static const struct
  * compiler that pads this struct fails here instead of
  * misindexing at runtime. */
 typedef char msg_hash_sv_blob_check[
-      (sizeof(msg_hash_sv_blob) == (231161u
+      (sizeof(msg_hash_sv_blob) == (231302u
 #ifdef ANDROID
        + 361u
 #endif
@@ -15559,6 +15563,7 @@ static const msg_hash_id_t msg_hash_sv_ids[] =
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LATENCY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LOGGING,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_NETWORK,
+   (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_ONSCREEN_DISPLAY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_PLAYLISTS,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_POWER_MANAGEMENT,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_RECORDING,

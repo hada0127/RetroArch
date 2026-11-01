@@ -3951,6 +3951,7 @@ static const struct
    char s_a55bf936[36];
    char s_c519f84d[32];
    char s_48aefa30[32];
+   char s_5d383a58[148];
    char s_dcf8bd8b[38];
    char s_bce9b94f[48];
    char s_d32f5a63[35];
@@ -10515,6 +10516,9 @@ static const struct
    "Taispe\303\241in socruithe 'Aga folaigh'.",
    "Taispe\303\241in socruithe 'Log\303\241il'.",
    "Taispe\303\241in socruithe 'L\303\255onra'.",
+   "Taispe\303\241in socruithe 'Taispe\303\241int ar an Sc\303\241ile\303\241n'. B\303\255onn tionch"
+   "ar aige ar 'F\303\263gra\303\255 ar an Sc\303\241ile\303\241n & Forleagan' faoi 'Comh\303\251ada"
+   "n \303\232s\303\241ideora'.",
    "Taispe\303\241in socruithe 'Seinmliosta\303\255'.",
    "Taispe\303\241in socruithe 'Bainist\303\255ocht Cumhachta'.",
    "Taispe\303\241in socruithe 'Taifeadadh'.",
@@ -12221,7 +12225,7 @@ static const struct
  * compiler that pads this struct fails here instead of
  * misindexing at runtime. */
 typedef char msg_hash_ga_blob_check[
-      (sizeof(msg_hash_ga_blob) == (268406u
+      (sizeof(msg_hash_ga_blob) == (268554u
 #ifdef ANDROID
        + 390u
 #endif
@@ -16713,6 +16717,7 @@ static const msg_hash_id_t msg_hash_ga_ids[] =
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LATENCY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_LOGGING,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_NETWORK,
+   (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_ONSCREEN_DISPLAY,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_PLAYLISTS,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_POWER_MANAGEMENT,
    (msg_hash_id_t)MENU_ENUM_SUBLABEL_SETTINGS_SHOW_RECORDING,
